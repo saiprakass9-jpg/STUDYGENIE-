@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI STUDYGenie</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+    body {
+      background-color: #212121;
+      color: #ececec;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Header */
+    header {
+      width: 100%;
+      padding: 20px;
+      border-bottom: 1px solid #424242;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #171717;
+      flex-shrink: 0;
+    }
+    .brand { font-size: 1.2rem; font-weight: bold; color: #c7c7c7; }
+    .close-btn { text-decoration: none; color: #888; font-size: 0.9rem; }
+
+    /* Chat Area */
+    .chat-container {
+      flex: 1;
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.ai { justify-content: flex-start; }
+    .message.user { justify-content: flex-end; }
+
+    .avatar {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .ai-avatar { background: #10a37f; }
+    .user-avatar { background: #555; }
+
+    .bubble {
+      max-width: 70%;
+      padding: 10px 15px;
+      border-radius: 12px;
+      line-height: 1.4;
+      font-size: 0.95rem;
+    }
+    .ai-bubble {
+      background: #2a2a2a;
+      color: #d1d5db;
+      border: 1px solid #3a3a3a;
+    }
+    .user-bubble {
+      background: #40414f;
+      color: #fff;
+      border: 1px solid #303139;
+    }
+
+    /* Input Area */
+    .input-area {
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+    .input-box {
+      width: 100%;
+      background-color: #40414f;
+      border: 1px solid #303139;
+      border-radius: 12px;
+      display: flex;
+      padding: 10px 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      align-items: center;
+    }
+    textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: white;
+      resize: none;
+      height: 24px;
+      font-size: 1rem;
+      outline: none;
+      max-height: 100px;
+    }
+    button.send-btn {
+      background: transparent;
+      border: none;
+      color: #ececec;
+      cursor: pointer;
+      margin-left: 10px;
+      opacity: 0.8;
+      font-size: 1.2rem;
+      transition: 0.2s;
+    }
+    button.send-btn:hover { opacity: 1; color: #10a37f; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">STUDYGenie AI</div>
+    <a href="gt4.html" onclick="window.close()" class="close-btn">Exit Chat</a>
+  </header>
+
+  <div class="chat-container" id="chatBox">
+    <!-- AI Greeting Message -->
+    <div class="message ai">
+      <div class="avatar ai-avatar">🧞‍♂️</div>
+      <div class="bubble ai-bubble">
+        <h2 style="font-size:1rem; margin-bottom:5px;">How can I help you study today?</h2>
+        <p>I can help you debug code, explain concepts, or create study plans. Just ask!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-area">
+    <div class="input-box">
+      <textarea id="userInput" placeholder="Ask anything about your subjects..." onkeypress="handleEnter(event)"></textarea>
+      <button class="send-btn" onclick="sendMessage()">➤</button>
+    </div>
+    <p style="text-align: center; font-size: 0.7rem; color: #666; margin-top: 10px;">AI can make mistakes. Check important info.</p>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById('chatBox');
+    const userInput = document.getElementById('userInput');
+
+    function handleEnter(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
+    }
+
+    function sendMessage() {
+      const text = userInput.value.trim();
+      if (text === "") return;
+
+      appendMessage('user', text);
+      userInput.value = '';
+
+      setTimeout(() => {
+        let aiResponse = "That's an interesting question about " + text.split(' ')[0] + "! Concepts in programming often rely on logic and syntax.";
+        if(text.toLowerCase().includes("java")) {
+          aiResponse = "Java is an object-oriented language. Remember: Write Once, Run Anywhere!";
+        } else if(text.toLowerCase().includes("python")) {
+          aiResponse = "Python is great for data science because of libraries like Pandas and NumPy. Indentation is key!";
+        } else if(text.toLowerCase().includes("hello")) {
+          aiResponse = "Hello there! Ready to code?";
+        }
+        appendMessage('ai', aiResponse);
+      }, 1000);
+    }
+
+    function appendMessage(sender, text) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender);
+
+      const avatarClass = sender === 'ai' ? 'ai-avatar' : 'user-avatar';
+      const avatarSymbol = sender === 'ai' ? '🧞‍♂️' : '👤';
+      const bubbleClass = sender === 'ai' ? 'ai-bubble' : 'user-bubble';
+
+      messageDiv.innerHTML = `
+        <div class="avatar ${avatarClass}">${avatarSymbol}</div>
+        <div class="bubble ${bubbleClass}">${text}</div>
+      `;
+
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>

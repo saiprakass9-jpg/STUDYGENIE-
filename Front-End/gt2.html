@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StudyGenie - Sign Up</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100%;
+      background: linear-gradient;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Wrapper for form + image */
+    .signup-wrapper {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    /* Sign-up box */
+    .container {
+      width: 320px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .container h2 {
+      margin-bottom: 15px;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #005fa3;
+    }
+
+    a {
+      display: block;
+      margin-top: 10px;
+      color: #0078d7;
+      text-decoration: none;
+    }
+
+    /* Right-side image */
+    .side-image {
+      width: 280px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .signup-wrapper {
+        flex-direction: column;
+      }
+      .side-image {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 🧞‍♂️ Sign-Up Form + Picture together -->
+  <div class="signup-wrapper">
+    <div class="container">
+      <h2>Sign Up</h2>
+      <form action="profile.html" method="get">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <input type="password" placeholder="Confirm Password" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <a href="gt1.html">Already have an account? Sign In</a>
+    </div>
+
+    <!-- Replace with your own picture -->
+    <img src="C:\sai progarams\AquaScope-Navigator\goo.jpg.png" alt="Your Picture" class="side-image">
+  </div>
+</body>
+</html>

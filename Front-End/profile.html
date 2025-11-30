@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="style .css">
+  <style>
+    .profile-card {
+      text-align: left;
+    }
+    .profile-card h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #0078d7;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .save-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .save-btn:hover {
+      background: #005a9e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container profile-card">
+    <h2>Enter Profile</h2>
+    <form action="gt4.html" method="get">
+      <label for="name">frist Name:</label>
+      <input type="text" id="name" placeholder="Enter your frist name" required>
+
+      <label for="name">last name</label>
+      <input type="text" id="name" placeholder="Enter your last name" required>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" placeholder="Enter your age">
+
+      <label for="weight">Qualification:</label>
+      <input type="text" id="edu" placeholder="Enter your Qualification">
+      <label for="weight">Pursing:</label>
+      <input type="text" id="edu" placeholder="Enter your pursing">
+
+   <label for="language">Preferred language:</label>
+      <select id="language" required>
+        <option value="" disabled selected>Select language</option>
+        <option value="en">English</option>
+        <option value="te">Telugu (తెలుగు)</option>
+        <option value="hi">Hindi (हिंदी)</option>
+      </select>
+     <button type="submit">Save Profile</button>
+    </form>
+    <a href="index.html">Log Out</a>
+  </div>
+  </body>
+</html>
